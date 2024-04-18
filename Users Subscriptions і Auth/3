@@ -1,0 +1,64 @@
+class User:
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+
+class Subscription:
+    def __init__(self, service_name):
+        self.service_name = service_name
+
+class UserManager:
+    def __init__(self):
+        self.users = []
+
+    def register_user(self, username, email, password):
+        new_user = User(username, email, password)
+        self.users.append(new_user)
+        return new_user
+
+    def find_user_by_username(self, username):
+        for user in self.users:
+            if user.username == username:
+                return user
+        return None
+
+class SubscriptionManager:
+    def __init__(self):
+        self.subscriptions = []
+
+    def add_subscription(self, user, service_name):
+        new_subscription = Subscription(service_name)
+        self.subscriptions.append((user, new_subscription))
+        return new_subscription
+
+class AuthManager:
+    def __init__(self):
+        self.logged_in_users = {}
+
+    def login(self, username, password):
+        # Вхід користувача. Перевірка облікових даних і т.д.
+        pass
+
+    def logout(self, username):
+        # Вихід користувача. Закінчення сеансу і т.д.
+        pass
+
+# Приклад використання
+user_manager = UserManager()
+subscription_manager = SubscriptionManager()
+auth_manager = AuthManager()
+
+# Реєстрація нового користувача
+new_user = user_manager.register_user("john_doe", "john@example.com", "password123")
+print("Registered user:", new_user.username)
+
+# Вхід користувача
+auth_manager.login("john_doe", "password123")
+
+# Підписка на сервіс
+subscription_manager.add_subscription(new_user, "Netflix")
+print("Subscribed to Netflix")
+
+# Вихід користувача
+auth_manager.logout("john_doe")
