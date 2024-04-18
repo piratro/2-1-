@@ -1,0 +1,15 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/subscriptions/<username>')
+def get_subscriptions(username):
+    # Логіка для отримання інформації про підписки користувача з бази даних
+    subscriptions_data = {
+        'username': username,
+        'subscriptions': ['Netflix', 'Spotify']
+    }
+    return jsonify(subscriptions_data)
+
+if __name__ == '__main__':
+    app.run(port=5002)

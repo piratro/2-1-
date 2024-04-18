@@ -1,0 +1,24 @@
+import requests
+
+def get_user_info(username):
+    users_url = 'http://localhost:5001/users/' + username
+    response = requests.get(users_url)
+    user_data = response.json()
+    return user_data
+
+def get_subscriptions(username):
+    subscriptions_url = 'http://localhost:5002/subscriptions/' + username
+    response = requests.get(subscriptions_url)
+    subscriptions_data = response.json()
+    return subscriptions_data
+
+def main():
+    username = 'john_doe'
+    user_info = get_user_info(username)
+    subscriptions_info = get_subscriptions(username)
+
+    print("User Info:", user_info)
+    print("Subscriptions:", subscriptions_info)
+
+if __name__ == '__main__':
+    main()

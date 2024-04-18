@@ -1,0 +1,13 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/login')
+def login():
+    # Логіка для аутентифікації користувача
+    # Після успішної аутентифікації генеруємо токен доступу
+    access_token = 'example_access_token'
+    return jsonify({'access_token': access_token})
+
+if __name__ == '__main__':
+    app.run(port=5003)
