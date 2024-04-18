@@ -1,0 +1,42 @@
+class AuthManager:
+    def __init__(self):
+        self.logged_in_users = {}
+
+    def login(self, username, password):
+        # Перевірка облікових даних користувача
+        # Якщо вони вірні, додаємо користувача до списку авторизованих
+        if self._authenticate(username, password):
+            token = self._generate_token()
+            self.logged_in_users[token] = username
+            return token
+        else:
+            return None
+
+    def _authenticate(self, username, password):
+        # Здійснюємо перевірку облікових даних в базі даних або деякому іншому джерелі
+        # У цьому прикладі просто перевіряємо, чи є такий користувач в нашій системі
+        user = user_manager.find_user_by_username(username)
+        return user is not None and user.password == password
+
+    def _generate_token(self):
+        # Генеруємо токен доступу, наприклад, за допомогою бібліотеки secrets
+        import secrets
+        return secrets.token_hex(16)
+
+    def logout(self, token):
+        if token in self.logged_in_users:
+            del self.logged_in_users[token]
+            return True
+        else:
+            return False
+
+# Приклад використання
+auth_manager = AuthManager()
+token = auth_manager.login("john_doe", "password123")
+if token:
+    print("User logged in with token:", token)
+    # Робимо щось з авторизованим користувачем
+    auth_manager.logout(token)
+    print("User logged out")
+else:
+    print("Login failed")

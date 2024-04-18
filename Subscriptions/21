@@ -1,0 +1,27 @@
+class Subscription:
+    def __init__(self, user, service_name, subscription_type):
+        self.user = user
+        self.service_name = service_name
+        self.subscription_type = subscription_type
+
+class SubscriptionManager:
+    def __init__(self):
+        self.subscriptions = []
+
+    def subscribe(self, user, service_name, subscription_type):
+        new_subscription = Subscription(user, service_name, subscription_type)
+        self.subscriptions.append(new_subscription)
+        return new_subscription
+
+    def get_subscriptions_by_user(self, user):
+        user_subscriptions = []
+        for subscription in self.subscriptions:
+            if subscription.user == user:
+                user_subscriptions.append(subscription)
+        return user_subscriptions
+
+# Приклад використання
+subscription_manager = SubscriptionManager()
+subscription_manager.subscribe(new_user, "Netflix", "Premium")
+user_subscriptions = subscription_manager.get_subscriptions_by_user(new_user)
+print("User subscriptions:", [sub.service_name for sub in user_subscriptions])
